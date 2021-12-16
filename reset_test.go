@@ -31,9 +31,9 @@ func (s *ClientSuite) TestResetGetSuccess(c *C) {
 	robotClient := client.NewBasicAuthClient("user", "pass")
 	robotClient.SetBaseURL(ts.URL)
 
-	reset, err := robotClient.ResetGet(testServerIP)
+	reset, err := robotClient.ResetGet(testServerID)
 	c.Assert(err, IsNil)
-	c.Assert(reset.ServerIP, Equals, testServerIP)
+	c.Assert(reset.ServerNumber, Equals, testServerID)
 	c.Assert(len(reset.Type), Equals, 3)
 }
 
@@ -50,7 +50,7 @@ func (s *ClientSuite) TestResetGetInvalidResponse(c *C) {
 	robotClient := client.NewBasicAuthClient("user", "pass")
 	robotClient.SetBaseURL(ts.URL)
 
-	_, err := robotClient.ResetGet(testServerIP)
+	_, err := robotClient.ResetGet(testServerID)
 	c.Assert(err, Not(IsNil))
 }
 
@@ -63,7 +63,7 @@ func (s *ClientSuite) TestResetGetServerError(c *C) {
 	robotClient := client.NewBasicAuthClient("user", "pass")
 	robotClient.SetBaseURL(ts.URL)
 
-	_, err := robotClient.ResetGet(testServerIP)
+	_, err := robotClient.ResetGet(testServerID)
 	c.Assert(err, Not(IsNil))
 }
 
@@ -97,9 +97,9 @@ func (s *ClientSuite) TestResetSetSuccess(c *C) {
 		Type: models.ResetTypeHardware,
 	}
 
-	reset, err := robotClient.ResetSet(testServerIP, input)
+	reset, err := robotClient.ResetSet(testServerID, input)
 	c.Assert(err, IsNil)
-	c.Assert(reset.ServerIP, Equals, testServerIP)
+	c.Assert(reset.ServerNumber, Equals, testServerID)
 	c.Assert(reset.Type, Equals, "hw")
 }
 
@@ -127,7 +127,7 @@ func (s *ClientSuite) TestResetSetInvalidResponse(c *C) {
 		Type: models.ResetTypeHardware,
 	}
 
-	_, err := robotClient.ResetSet(testServerIP, input)
+	_, err := robotClient.ResetSet(testServerID, input)
 	c.Assert(err, Not(IsNil))
 }
 
@@ -144,6 +144,6 @@ func (s *ClientSuite) TestResetSetServerError(c *C) {
 		Type: models.ResetTypeHardware,
 	}
 
-	_, err := robotClient.ResetSet(testServerIP, input)
+	_, err := robotClient.ResetSet(testServerID, input)
 	c.Assert(err, Not(IsNil))
 }

@@ -6,6 +6,9 @@ type IPResponse struct {
 
 type IP struct {
 	IP              string `json:"ip"`
+	Gateway         string `json:"gateway"`
+	Mask            int    `json:"mask"`
+	Broadcast       string `json:"broadcast"`
 	ServerIP        string `json:"server_ip"`
 	ServerNumber    int    `json:"server_number"`
 	Locked          bool   `json:"locked"`

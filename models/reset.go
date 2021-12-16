@@ -9,10 +9,11 @@ type ResetResponse struct {
 }
 
 type Reset struct {
-	OperatingStatus string   `json:"operating_status"`
 	ServerIP        string   `json:"server_ip"`
+	ServerIPv6Net   string   `json:"server_ipv6_net"`
 	ServerNumber    int      `json:"server_number"`
 	Type            []string `json:"type"`
+	OperatingStatus string   `json:"operating_status"`
 }
 
 type ResetPostResponse struct {
@@ -20,8 +21,10 @@ type ResetPostResponse struct {
 }
 
 type ResetPost struct {
-	ServerIP string `json:"server_ip"`
-	Type     string `json:"type"`
+	ServerIP      string `json:"server_ip"`
+	ServerIPv6Net string `json:"server_ipv6_net"`
+	ServerNumber  int    `json:"server_number"`
+	Type          string `json:"type"`
 }
 
 type ResetSetInput struct {

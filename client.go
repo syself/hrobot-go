@@ -41,7 +41,21 @@ func (c *Client) GetVersion() string {
 }
 
 func (c *Client) doGetRequest(url string) ([]byte, error) {
-	req, err := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest(http.MethodGet, url, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	bytes, err := c.doRequest(req)
+	if err != nil {
+		return nil, err
+	}
+
+	return bytes, nil
+}
+
+func (c *Client) doDeleteRequest(url string) ([]byte, error) {
+	req, err := http.NewRequest(http.MethodDelete, url, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +69,7 @@ func (c *Client) doGetRequest(url string) ([]byte, error) {
 }
 
 func (c *Client) doPostFormRequest(url string, formData url.Values) ([]byte, error) {
-	req, err := http.NewRequest("POST", url, strings.NewReader(formData.Encode()))
+	req, err := http.NewRequest(http.MethodPost, url, strings.NewReader(formData.Encode()))
 	if err != nil {
 		return nil, err
 	}
@@ -82,7 +96,7 @@ func (c *Client) doRequest(req *http.Request) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	if 200 != resp.StatusCode {
+	if resp.StatusCode != 200 && resp.StatusCode != 201 {
 		return nil, fmt.Errorf("%s", body)
 	}
 	return body, nil

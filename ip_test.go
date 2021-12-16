@@ -7,9 +7,8 @@ import (
 	"net/http/httptest"
 	"os"
 
+	client "github.com/syself/hrobot-go"
 	. "gopkg.in/check.v1"
-
-	"github.com/syself/hrobot-go"
 )
 
 func (s *ClientSuite) TestIPListSuccess(c *C) {
@@ -36,8 +35,8 @@ func (s *ClientSuite) TestIPListSuccess(c *C) {
 	c.Assert(len(ips), Equals, 2)
 	c.Assert(ips[0].IP, Equals, testIP)
 	c.Assert(ips[1].IP, Equals, testIP2)
-	c.Assert(ips[0].ServerIP, Equals, testServerIP)
-	c.Assert(ips[1].ServerIP, Equals, testServerIP)
+	c.Assert(ips[0].ServerNumber, Equals, testServerID)
+	c.Assert(ips[1].ServerNumber, Equals, testServerID)
 }
 
 func (s *ClientSuite) TestIPListInvalidResponse(c *C) {

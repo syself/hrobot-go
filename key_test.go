@@ -7,9 +7,9 @@ import (
 	"net/http/httptest"
 	"os"
 
+	client "github.com/syself/hrobot-go"
+	"github.com/syself/hrobot-go/models"
 	. "gopkg.in/check.v1"
-
-	"github.com/syself/hrobot-go"
 )
 
 func (s *ClientSuite) TestKeyListSuccess(c *C) {
@@ -64,4 +64,41 @@ func (s *ClientSuite) TestKeyListServerError(c *C) {
 
 	_, err := robotClient.KeyGetList()
 	c.Assert(err, Not(IsNil))
+}
+
+func (s *ClientSuite) TestKeySetSuccess(c *C) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		reqContentType := r.Header.Get("Content-Type")
+		c.Assert(reqContentType, Equals, "application/x-www-form-urlencoded")
+
+		body, bodyErr := ioutil.ReadAll(r.Body)
+		c.Assert(bodyErr, IsNil)
+		c.Assert(string(body), Equals, "data=ssh-rsa+AAAAB3NzaC1yc%2B...&name=NewKey")
+
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+
+		pwd, pwdErr := os.Getwd()
+		c.Assert(pwdErr, IsNil)
+
+		data, readErr := ioutil.ReadFile(fmt.Sprintf("%s/test/response/key_set.json", pwd))
+		c.Assert(readErr, IsNil)
+
+		_, err := w.Write(data)
+		c.Assert(err, IsNil)
+	}))
+	defer ts.Close()
+
+	robotClient := client.NewBasicAuthClient("user", "pass")
+	robotClient.SetBaseURL(ts.URL)
+
+	input := &models.KeySetInput{
+		Name: "NewKey",
+		Data: "ssh-rsa AAAAB3NzaC1yc+...",
+	}
+
+	linux, err := robotClient.KeySet(input)
+	c.Assert(err, IsNil)
+	c.Assert(linux.Name, Equals, "NewKey")
+	c.Assert(linux.Data, Equals, "ssh-rsa AAAAB3NzaC1yc+...")
 }

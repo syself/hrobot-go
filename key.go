@@ -2,6 +2,8 @@ package client
 
 import (
 	"encoding/json"
+	"fmt"
+	neturl "net/url"
 
 	"github.com/syself/hrobot-go/models"
 )
@@ -25,4 +27,25 @@ func (c *Client) KeyGetList() ([]models.Key, error) {
 	}
 
 	return data, nil
+}
+
+func (c *Client) KeySet(input *models.KeySetInput) (*models.Key, error) {
+	url := fmt.Sprintf(c.baseURL + "/key")
+
+	formData := neturl.Values{}
+	formData.Set("name", input.Name)
+	formData.Set("data", input.Data)
+
+	bytes, err := c.doPostFormRequest(url, formData)
+	if err != nil {
+		return nil, err
+	}
+
+	var keyResp models.KeyResponse
+	err = json.Unmarshal(bytes, &keyResp)
+	if err != nil {
+		return nil, err
+	}
+
+	return &keyResp.Key, nil
 }

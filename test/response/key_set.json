@@ -1,0 +1,9 @@
+{
+  "key":{
+    "name":"NewKey",
+    "fingerprint":"cb:8b:ef:a7:fe:04:87:3f:e5:55:cd:12:e3:e8:9f:99",
+    "type":"RSA",
+    "size":8192,
+    "data":"ssh-rsa AAAAB3NzaC1yc+..."
+  }
+}

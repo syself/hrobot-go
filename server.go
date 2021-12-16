@@ -29,8 +29,8 @@ func (c *Client) ServerGetList() ([]models.Server, error) {
 	return data, nil
 }
 
-func (c *Client) ServerGet(ip string) (*models.Server, error) {
-	url := fmt.Sprintf(c.baseURL+"/server/%s", ip)
+func (c *Client) ServerGet(id int) (*models.Server, error) {
+	url := fmt.Sprintf(c.baseURL+"/server/%v", id)
 	bytes, err := c.doGetRequest(url)
 	if err != nil {
 		return nil, err
@@ -45,8 +45,8 @@ func (c *Client) ServerGet(ip string) (*models.Server, error) {
 	return &serverResp.Server, nil
 }
 
-func (c *Client) ServerSetName(ip string, input *models.ServerSetNameInput) (*models.Server, error) {
-	url := fmt.Sprintf(c.baseURL+"/server/%s", ip)
+func (c *Client) ServerSetName(id int, input *models.ServerSetNameInput) (*models.Server, error) {
+	url := fmt.Sprintf(c.baseURL+"/server/%v", id)
 
 	formData := neturl.Values{}
 	formData.Set("server_name", input.Name)
@@ -65,8 +65,8 @@ func (c *Client) ServerSetName(ip string, input *models.ServerSetNameInput) (*mo
 	return &serverResp.Server, nil
 }
 
-func (c *Client) ServerReverse(ip string) (*models.Cancellation, error) {
-	url := fmt.Sprintf(c.baseURL+"/server/%s/reversal", ip)
+func (c *Client) ServerReverse(id int) (*models.Cancellation, error) {
+	url := fmt.Sprintf(c.baseURL+"/server/%v/reversal", id)
 
 	bytes, err := c.doPostFormRequest(url, nil)
 	if err != nil {

@@ -21,8 +21,8 @@ type ClientSuite struct{}
 
 var _ = Suite(&ClientSuite{})
 
-const testServerIP = "123.123.123.123"
-const testServerIP2 = "123.123.123.124"
+const testServerID = 321
+const testServerID2 = 421
 
 const testIP = "123.123.123.123"
 const testIP2 = "124.124.124.124"
@@ -90,7 +90,7 @@ func (s *ClientSuite) TestGetInvalidURL(c *C) {
 	c.Assert(err, Not(IsNil))
 }
 
-func (s *ClientSuite) TestPostIvalidURL(c *C) {
+func (s *ClientSuite) TestPostInvalidURL(c *C) {
 	robotClient := client.NewBasicAuthClient("user", "pass")
 	robotClient.SetBaseURL("http://Not a valid URL")
 
@@ -98,7 +98,7 @@ func (s *ClientSuite) TestPostIvalidURL(c *C) {
 		Name: "server-name-123456",
 	}
 
-	_, err := robotClient.ServerSetName(testServerIP, input)
+	_, err := robotClient.ServerSetName(testServerID, input)
 	c.Assert(err, Not(IsNil))
 }
 

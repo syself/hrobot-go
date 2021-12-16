@@ -1,0 +1,18 @@
+{
+  "linux":{
+    "server_ip":"123.123.123.123",
+    "server_ipv6_net":"2a01:4f8:111:4221::",
+    "server_number":321,
+    "dist":"CentOS 5.5 minimal",
+    "arch":32,
+    "lang":"en",
+    "active":true,
+    "password":"jEt0dtUvomlyOwRr",
+    "authorized_key":[
+
+    ],
+    "host_key":[
+
+    ]
+  }
+}

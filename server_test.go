@@ -34,8 +34,8 @@ func (s *ClientSuite) TestServerGetListSuccess(c *C) {
 	servers, err := robotClient.ServerGetList()
 	c.Assert(err, IsNil)
 	c.Assert(len(servers), Equals, 2)
-	c.Assert(servers[0].ServerIP, Equals, testServerIP)
-	c.Assert(servers[1].ServerIP, Equals, testServerIP2)
+	c.Assert(servers[0].ServerNumber, Equals, testServerID)
+	c.Assert(servers[1].ServerNumber, Equals, testServerID2)
 }
 
 func (s *ClientSuite) TestServerGetListInvalidResponse(c *C) {
@@ -87,9 +87,9 @@ func (s *ClientSuite) TestServerGetSuccess(c *C) {
 	robotClient := client.NewBasicAuthClient("user", "pass")
 	robotClient.SetBaseURL(ts.URL)
 
-	server, err := robotClient.ServerGet(testServerIP)
+	server, err := robotClient.ServerGet(testServerID)
 	c.Assert(err, IsNil)
-	c.Assert(server.ServerIP, Equals, testServerIP)
+	c.Assert(server.ServerNumber, Equals, testServerID)
 }
 
 func (s *ClientSuite) TestServerGetInvalidResponse(c *C) {
@@ -105,7 +105,7 @@ func (s *ClientSuite) TestServerGetInvalidResponse(c *C) {
 	robotClient := client.NewBasicAuthClient("user", "pass")
 	robotClient.SetBaseURL(ts.URL)
 
-	_, err := robotClient.ServerGet(testServerIP)
+	_, err := robotClient.ServerGet(testServerID)
 	c.Assert(err, Not(IsNil))
 }
 
@@ -118,7 +118,7 @@ func (s *ClientSuite) TestServerGetServerError(c *C) {
 	robotClient := client.NewBasicAuthClient("user", "pass")
 	robotClient.SetBaseURL(ts.URL)
 
-	_, err := robotClient.ServerGet(testServerIP)
+	_, err := robotClient.ServerGet(testServerID)
 	c.Assert(err, Not(IsNil))
 }
 
@@ -141,7 +141,7 @@ func (s *ClientSuite) TestServerGetNotFound(c *C) {
 	robotClient := client.NewBasicAuthClient("user", "pass")
 	robotClient.SetBaseURL(ts.URL)
 
-	_, err := robotClient.ServerGet(testServerIP)
+	_, err := robotClient.ServerGet(testServerID)
 	c.Assert(err, NotNil)
 }
 
@@ -175,9 +175,9 @@ func (s *ClientSuite) TestServerSetNameSuccess(c *C) {
 		Name: "mongodb-prod-px62-nvme-hetzner-nbg1-dc1-123456",
 	}
 
-	server, err := robotClient.ServerSetName(testServerIP, input)
+	server, err := robotClient.ServerSetName(testServerID, input)
 	c.Assert(err, IsNil)
-	c.Assert(server.ServerIP, Equals, testServerIP)
+	c.Assert(server.ServerNumber, Equals, testServerID)
 }
 
 func (s *ClientSuite) TestServerSetNameInvalidResponse(c *C) {
@@ -204,7 +204,7 @@ func (s *ClientSuite) TestServerSetNameInvalidResponse(c *C) {
 		Name: "mongodb-prod-px62-nvme-hetzner-nbg1-dc1-123456",
 	}
 
-	_, err := robotClient.ServerSetName(testServerIP, input)
+	_, err := robotClient.ServerSetName(testServerID, input)
 	c.Assert(err, Not(IsNil))
 }
 
@@ -221,7 +221,7 @@ func (s *ClientSuite) TestServerSetNameServerError(c *C) {
 		Name: "mongodb-prod-px62-nvme-hetzner-nbg1-dc1-123456",
 	}
 
-	_, err := robotClient.ServerSetName(testServerIP, input)
+	_, err := robotClient.ServerSetName(testServerID, input)
 	c.Assert(err, Not(IsNil))
 }
 
@@ -244,9 +244,9 @@ func (s *ClientSuite) TestServerReverseSuccess(c *C) {
 	robotClient := client.NewBasicAuthClient("user", "pass")
 	robotClient.SetBaseURL(ts.URL)
 
-	cancellation, err := robotClient.ServerReverse(testServerIP)
+	cancellation, err := robotClient.ServerReverse(testServerID)
 	c.Assert(err, IsNil)
-	c.Assert(cancellation.ServerIP, Equals, testServerIP)
+	c.Assert(cancellation.ServerNumber, Equals, testServerID)
 	c.Assert(cancellation.CancellationDate, Equals, "2014-04-15")
 }
 
@@ -263,7 +263,7 @@ func (s *ClientSuite) TestServerReverseInvalidResponse(c *C) {
 	robotClient := client.NewBasicAuthClient("user", "pass")
 	robotClient.SetBaseURL(ts.URL)
 
-	_, err := robotClient.ServerReverse(testServerIP)
+	_, err := robotClient.ServerReverse(testServerID)
 	c.Assert(err, Not(IsNil))
 }
 
@@ -276,6 +276,6 @@ func (s *ClientSuite) TestServerReverseServerError(c *C) {
 	robotClient := client.NewBasicAuthClient("user", "pass")
 	robotClient.SetBaseURL(ts.URL)
 
-	_, err := robotClient.ServerReverse(testServerIP)
+	_, err := robotClient.ServerReverse(testServerID)
 	c.Assert(err, Not(IsNil))
 }
