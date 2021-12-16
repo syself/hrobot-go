@@ -1,12 +1,15 @@
 # hrobot-go: A Go library for the Hetzner Robot Webservice
 
-![Build](https://gitlab.com/newsletter2go/hrobot-go/badges/master/pipeline.svg) ![Coverage](https://gitlab.com/newsletter2go/hrobot-go/badges/master/coverage.svg)
-
 Package hrobot-go is a library for the Hetzner Robot Webservice.
 
 The library’s documentation is available at [GoDoc](https://godoc.org/github.com/syself/hrobot-go),
 the public API documentation is available at [robot.your-server.de](https://robot.your-server.de/doc/webservice/en.html).
 
+## Infos about fork
+
+This fork is based on the repo of nl2go. The original repo implemented the important parts of Hetzner Robot API, but has not been updated since 2019. This work has the goal to keep up with API changes on Hetzner side and to implement additional functions that Hetzner Robot offers. 
+
+Contributions and feature requests are very welcome!
 ## Example
 
 ```go
