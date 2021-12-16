@@ -5,7 +5,7 @@ import (
 	"fmt"
 	neturl "net/url"
 
-	"github.com/nl2go/hrobot-go/models"
+	"github.com/syself/hrobot-go/models"
 )
 
 func (c *Client) ResetGet(ip string) (*models.Reset, error) {

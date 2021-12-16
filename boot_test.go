@@ -9,8 +9,8 @@ import (
 
 	. "gopkg.in/check.v1"
 
-	client "github.com/nl2go/hrobot-go"
-	"github.com/nl2go/hrobot-go/models"
+	client "github.com/syself/hrobot-go"
+	"github.com/syself/hrobot-go/models"
 )
 
 func (s *ClientSuite) TestBootRescueGetInactiveSuccess(c *C) {

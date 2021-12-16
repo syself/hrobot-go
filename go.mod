@@ -1,4 +1,4 @@
-module github.com/nl2go/hrobot-go
+module github.com/syself/hrobot-go
 
 go 1.13
 

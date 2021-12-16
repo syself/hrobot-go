@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/nl2go/hrobot-go/models"
+	"github.com/syself/hrobot-go/models"
 )
 
 func (c *Client) RDnsGetList() ([]models.Rdns, error) {

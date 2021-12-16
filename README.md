@@ -4,7 +4,7 @@
 
 Package hrobot-go is a library for the Hetzner Robot Webservice.
 
-The library’s documentation is available at [GoDoc](https://godoc.org/github.com/nl2go/hrobot-go),
+The library’s documentation is available at [GoDoc](https://godoc.org/github.com/syself/hrobot-go),
 the public API documentation is available at [robot.your-server.de](https://robot.your-server.de/doc/webservice/en.html).
 
 ## Example
@@ -16,7 +16,7 @@ import (
     "fmt"
     "log"
 
-    client "github.com/nl2go/hrobot-go"
+    client "github.com/syself/hrobot-go"
 )
 
 func main() {
