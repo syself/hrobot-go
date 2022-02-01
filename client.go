@@ -1,11 +1,14 @@
 package client
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"strings"
+
+	"github.com/syself/hrobot-go/models"
 )
 
 const baseURL string = "https://robot-ws.your-server.de"
@@ -96,8 +99,20 @@ func (c *Client) doRequest(req *http.Request) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	if resp.StatusCode != 200 && resp.StatusCode != 201 {
-		return nil, fmt.Errorf("%s", body)
+	if resp.StatusCode >= 400 && resp.StatusCode <= 599 {
+		return nil, errorFromResponse(resp, body)
 	}
 	return body, nil
+}
+
+func errorFromResponse(resp *http.Response, body []byte) (reterr error) {
+	var errorResponse models.ErrorResponse
+	reterr = fmt.Errorf("server responded with status code %v", resp.StatusCode)
+	if err := json.Unmarshal(body, &errorResponse); err != nil {
+		return
+	}
+	if errorResponse.Error.Code == "" && errorResponse.Error.Message == "" {
+		return
+	}
+	return errorResponse.Error
 }
