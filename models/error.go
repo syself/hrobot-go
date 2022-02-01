@@ -46,3 +46,9 @@ func (e Error) Error() string {
 type ErrorResponse struct {
 	Error Error `json:"error"`
 }
+
+// IsError returns whether err is an API error with the given error code.
+func IsError(err error, code ErrorCode) bool {
+	apiErr, ok := err.(Error)
+	return ok && apiErr.Code == code
+}
