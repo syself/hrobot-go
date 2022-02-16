@@ -5,6 +5,9 @@ import "fmt"
 type ErrorCode string
 
 const (
+	ErrorCodeUnauthorized      ErrorCode = "UNAUTHORIZED"
+	ErrorCodeRateLimitExceeded ErrorCode = "RATE_LIMIT_EXCEEDED"
+
 	ErrorCodeConflict      ErrorCode = "CONFLICT"
 	ErrorCodeNotFound      ErrorCode = "NOT_FOUND"
 	ErrorCodeInvalidInput  ErrorCode = "INVALID_INPUT"
