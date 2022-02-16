@@ -6,6 +6,9 @@ type RobotClient interface {
 	SetBaseURL(baseURL string)
 	SetUserAgent(userAgent string)
 	GetVersion() string
+
+	ValidateCredentials() error
+
 	ServerGetList() ([]models.Server, error)
 	ServerGet(id int) (*models.Server, error)
 	ServerSetName(id int, input *models.ServerSetNameInput) (*models.Server, error)

@@ -12,7 +12,7 @@ import (
 )
 
 const baseURL string = "https://robot-ws.your-server.de"
-const version = "0.1.3"
+const version = "0.2.4"
 const userAgent = "hrobot-client/" + version
 
 type Client struct {
@@ -41,6 +41,13 @@ func (c *Client) SetUserAgent(userAgent string) {
 
 func (c *Client) GetVersion() string {
 	return version
+}
+
+func (c *Client) ValidateCredentials() error {
+	if _, err := c.doGetRequest(c.baseURL); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (c *Client) doGetRequest(url string) ([]byte, error) {
