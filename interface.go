@@ -18,6 +18,7 @@ type RobotClient interface {
 	IPGetList() ([]models.IP, error)
 	RDnsGetList() ([]models.Rdns, error)
 	RDnsGet(ip string) (*models.Rdns, error)
+	RDnsSet(ip string, input *models.RdnsSetInput) (*models.Rdns, error)
 	BootLinuxGet(id int) (*models.Linux, error)
 	BootLinuxDelete(id int) (*models.Linux, error)
 	BootLinuxSet(id int, input *models.LinuxSetInput) (*models.Linux, error)
