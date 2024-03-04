@@ -8,3 +8,7 @@ type Rdns struct {
 	IP  string `json:"ip"`
 	Ptr string `json:"ptr"`
 }
+
+type RdnsSetInput struct {
+	Ptr string `json:"ptr"`
+}
