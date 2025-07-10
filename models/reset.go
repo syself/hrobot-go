@@ -6,6 +6,7 @@ const (
 	ResetTypePower = "power"
 
 	// ResetTypePowerLong: Long power button press. This option forces the server to immediately shut off. It should only be used in cases where the system is unresponsive to a graceful shut-down.
+	// The server will be shut-down after that ResetType. You need to call ResetTypePower to turn it back on.
 	// Supported by some servers
 	ResetTypePowerLong = "power_long"
 
